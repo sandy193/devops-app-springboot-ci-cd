@@ -64,6 +64,34 @@ bat(/"${mvnHome}\bin\mvn" sonar:sonar/)
 
 }
 
+stage('Docker Build'){
+
+if (isUnix()) {
+sh "docker build -t sandy193/devops-app-springboot-ci-cd:latest ."
+} else {
+bat("docker build -t sandy193/devops-app-springboot-ci-cd:latest .")
+}
+
+}
+
+stage('DockerPush'){
+
+withCredentials([usernamePassword(credentialsId:'DockerHubToken',usernameVariable:'DockerHubTokenUser',
+passwordVariable:'DockerHubTokenPassword')]){
+
+if (isUnix()) {
+sh "docker login -u ${env.DockerHubTokenUser} -p ${DockerHubTokenPassword}"
+sh 'docker push sandy193/devops-app-springboot-ci-cd:latest'
+} else {
+bat("docker login -u ${env.DockerHubTokenUser} -p ${DockerHubTokenPassword}")
+bat('docker push sandy193/devops-app-springboot-ci-cd:latest')
+}
+}
+}
+
+
+
+
 stage('Publish') {
 
 def server = Artifactory.server 'Artifactory'
