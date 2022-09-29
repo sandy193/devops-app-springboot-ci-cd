@@ -6,7 +6,7 @@ def mvnHome
 
 stage('Prepare') {
 
-git url: 'git@github.com:sandy193/devops-app-springboot.git', branch: 'integration'
+git url: 'git@github.com:sandy193/devops-app-springboot-ci-cd.git', branch: 'integration'
 
 mvnHome = tool 'mvn'
 
