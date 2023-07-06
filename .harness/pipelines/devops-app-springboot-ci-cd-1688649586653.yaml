@@ -1,0 +1,56 @@
+pipeline:
+  identifier: Build_devops_app_springboot_ci_cd_1688649591967
+  name: Build devops-app-springboot-ci-cd
+  orgIdentifier: default
+  projectIdentifier: sandy_demo
+  properties:
+    ci:
+      codebase:
+        build: <+input>
+        connectorRef: account.Github_OAuth_1688649227392
+        repoName: sandy193/devops-app-springboot-ci-cd
+  stages:
+    - stage:
+        identifier: build
+        name: build
+        spec:
+          cloneCodebase: true
+          execution:
+            steps:
+              - step:
+                  identifier: echo
+                  name: echo
+                  spec:
+                    shell: Sh
+                    command: echo hello world
+                  timeout: ""
+                  type: Run
+                  description: sandy
+          platform:
+            arch: Amd64
+            os: Linux
+          runtime:
+            spec: {}
+            type: Cloud
+        type: CI
+    - stage:
+        name: sandy
+        identifier: sandy
+        description: ""
+        type: CI
+        spec:
+          cloneCodebase: true
+          execution:
+            steps:
+              - step:
+                  type: BuildAndPushDockerRegistry
+                  name: BuildAndPushDockerRegistry_1
+                  identifier: BuildAndPushDockerRegistry_1
+                  spec: {}
+              - step:
+                  type: ArtifactoryUpload
+                  name: ArtifactoryUpload_1
+                  identifier: ArtifactoryUpload_1
+                  spec: {}
+          infrastructure:
+            spec: {}
