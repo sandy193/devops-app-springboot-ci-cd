@@ -21,9 +21,11 @@ pipeline:
                   identifier: echo
                   name: echo
                   spec:
+                    shell: Sh
                     command: echo hello world
                   timeout: ""
                   type: Run
+                  description: sandy
           platform:
             arch: Amd64
             os: Linux
@@ -31,3 +33,24 @@ pipeline:
             spec: {}
             type: Cloud
         type: CI
+    - stage:
+        name: sandy
+        identifier: sandy
+        description: ""
+        type: CI
+        spec:
+          cloneCodebase: true
+          execution:
+            steps:
+              - step:
+                  type: BuildAndPushDockerRegistry
+                  name: BuildAndPushDockerRegistry_1
+                  identifier: BuildAndPushDockerRegistry_1
+                  spec: {}
+              - step:
+                  type: ArtifactoryUpload
+                  name: ArtifactoryUpload_1
+                  identifier: ArtifactoryUpload_1
+                  spec: {}
+          infrastructure:
+            spec: {}
