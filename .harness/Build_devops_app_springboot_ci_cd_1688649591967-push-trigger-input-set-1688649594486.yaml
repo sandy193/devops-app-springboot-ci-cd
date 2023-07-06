@@ -1,0 +1,14 @@
+inputSet:
+  name: Build_devops_app_springboot_ci_cd_1688649591967-push-trigger-input-set
+  identifier: Build_devops_app_springboot_ci_cd_1688649591967pushtriggerinputset
+  orgIdentifier: default
+  projectIdentifier: sandy_demo
+  pipeline:
+    identifier: Build_devops_app_springboot_ci_cd_1688649591967
+    properties:
+      ci:
+        codebase:
+          build:
+            type: branch
+            spec:
+              branch: <+trigger.branch>
